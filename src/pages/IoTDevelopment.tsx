@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
+import { SEO } from '../components/SEO';
 import Lottie from 'lottie-react';
 import smartCity from '../assets/animations/smart_city.json';
 
@@ -95,6 +96,11 @@ export function IoTDevelopment() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#020502] text-gray-200 font-sans selection:bg-emerald-500/30 overflow-x-hidden">
+      <SEO
+        title="IoT Development"
+        description="Intelligent IoT solutions for connected ecosystems. We design secure, scalable smart systems for industrial and consumer use."
+        canonical="https://innoaivators.com/iot-development"
+      />
 
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

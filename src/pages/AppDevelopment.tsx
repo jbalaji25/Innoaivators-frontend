@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
+import { SEO } from '../components/SEO';
 import Lottie from 'lottie-react';
 import mobileAppDev from '../assets/animations/mobile_app_development.json';
 
@@ -94,6 +95,11 @@ export function AppDevelopment() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#050510] text-gray-200 font-sans selection:bg-cyan-500/30 overflow-x-hidden">
+      <SEO
+        title="App Development"
+        description="Custom Android and iOS app development solutions. We build high-performance, user-centric mobile applications."
+        canonical="https://innoaivators.com/app-development"
+      />
 
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

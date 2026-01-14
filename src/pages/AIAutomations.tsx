@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
+import { SEO } from '../components/SEO';
 import Lottie from 'lottie-react';
 import manRobot from '../assets/animations/man_robot_workplace.json';
 
@@ -96,6 +97,11 @@ export function AIAutomations() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#050205] text-gray-200 font-sans selection:bg-rose-500/30 overflow-x-hidden">
+      <SEO
+        title="AI Automations"
+        description="Automate your business processes with intelligent AI solutions. We build cognitive workflows and autonomous agents."
+        canonical="https://innoaivators.com/ai-automations"
+      />
 
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

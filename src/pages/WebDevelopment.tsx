@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
+import { SEO } from '../components/SEO';
 import Lottie from 'lottie-react';
 import responsiveXperience from '../assets/animations/responsive_xperience.json';
 
@@ -95,6 +96,11 @@ export function WebDevelopment() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#020205] text-gray-200 font-sans selection:bg-indigo-500/30 overflow-x-hidden">
+      <SEO
+        title="Web Development"
+        description="Modern web development solutions tailored to your business needs. We build immersive, fast, and secure websites."
+        canonical="https://innoaivators.com/web-development"
+      />
 
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

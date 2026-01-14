@@ -6,6 +6,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
+import { SEO } from '../components/SEO';
 
 import backgroundVideo from '../assets/videos/Sin_Side_Studios.mp4';
 
@@ -60,10 +61,14 @@ export function Contact() {
         });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
+        const errorData = await response.json();
+        console.error('Backend error:', errorData);
+        console.error('Status:', response.status);
         setStatus('error');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      console.error('Error details:', error instanceof Error ? error.message : 'Unknown error');
       setStatus('error');
     }
   };
@@ -97,6 +102,11 @@ export function Contact() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#050510] text-gray-200 font-sans selection:bg-purple-500/30 overflow-x-hidden">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with Innoaivators for your next digital project. We're here to help you build the impossible."
+        canonical="https://innoaivators.com/contact"
+      />
       {/* Video Background */}
       <video
         autoPlay

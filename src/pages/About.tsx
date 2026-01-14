@@ -4,6 +4,7 @@ import { TargetIcon, UsersIcon, TrophyIcon, RocketIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TeamCarousel } from '../components/TeamCarousel';
 import { BorderBeam } from '../components/BorderBeam';
+import { SEO } from '../components/SEO';
 import video from '../backgroundeffects/3129977-uhd_3840_2160_30fps.mp4';
 import abdur from '../team/abdur.jpg';
 import afsal from '../team/afsal.jpg';
@@ -77,6 +78,11 @@ export function About() {
 
   return (
     <div className="w-full min-h-screen bg-transparent text-white about-container">
+      <SEO
+        title="About Us"
+        description="Learn about Innoaivators, our mission, values, and the team behind our innovative digital solutions."
+        canonical="https://innoaivators.com/about"
+      />
       {isLg && (
         <video autoPlay loop muted id="background-video">
           <source src={video} type="video/mp4" />

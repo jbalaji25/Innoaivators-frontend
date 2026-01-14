@@ -6,6 +6,7 @@ import {
 import { motion } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
+import { SEO } from '../components/SEO';
 import Lottie from 'lottie-react';
 import proksyDigital from '../assets/animations/proksy_digital.json';
 
@@ -89,6 +90,11 @@ export function DigitalMarketing() {
 
   return (
     <div className="relative w-full min-h-screen bg-[#050202] text-gray-200 font-sans selection:bg-orange-500/30 overflow-x-hidden">
+      <SEO
+        title="Digital Marketing"
+        description="Result-driven digital marketing strategies to flood your funnel with high-intent leads and scale revenue."
+        canonical="https://innoaivators.com/digital-marketing"
+      />
 
       {/* --- HERO SECTION --- */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
