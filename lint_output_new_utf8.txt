@@ -1,0 +1,16 @@
+﻿
+> magic-patterns-vite-template@0.0.1 lint
+> eslint . --ext .js,.jsx,.ts,.tsx
+
+
+E:\innoaivators\innoAIvators\src\components\ThreeDScrollTrigger.tsx
+  25:7  warning  'wrap' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+E:\innoaivators\innoAIvators\src\contexts\AuthContext.tsx
+  11:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+E:\innoaivators\innoAIvators\src\contexts\TeamContext.tsx
+  19:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+Γ£û 3 problems (0 errors, 3 warnings)
+

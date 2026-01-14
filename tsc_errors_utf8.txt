@@ -1,0 +1,19 @@
+﻿src/components/home/HeroSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/home/HeroSection.tsx(11,30): error TS2322: Type '{ className: string; }' is not assignable to type 'IntrinsicAttributes & GalaxyProps'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & GalaxyProps'.
+src/components/home/ServicesSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/home/TestimonialsSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/home/WhatWeDoSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/home/WhyChooseUsSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/SEO.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ServiceCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ServiceCard.tsx(3,26): error TS6133: 'BoxIcon' is declared but its value is never read.
+src/components/ServiceCard.tsx(8,9): error TS2749: 'BoxIcon' refers to a value, but is being used as a type here. Did you mean 'typeof BoxIcon'?
+src/components/TeamCarousel.tsx(382,17): error TS2590: Expression produces a union type that is too complex to represent.
+src/components/TeamCarousel.tsx(397,19): error TS2322: Type 'TargetAndTransition' is not assignable to type 'boolean | MakeCustomValueType<TargetProperties> | VariantLabels | undefined'.
+  Type 'TargetAndTransition' is missing the following properties from type 'string[]': length, pop, push, concat, and 26 more.
+src/components/TechStackCarousel.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/TextCarousel.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/index.tsx(2,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/AdminDashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/Timeline.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
