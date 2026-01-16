@@ -40,6 +40,8 @@ export function Contact() {
         ? 'https://innoaivators-backend.onrender.com/api/send-email'
         : '/api/send-email';
 
+      console.log('Attempting to send email to:', apiUrl);
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
