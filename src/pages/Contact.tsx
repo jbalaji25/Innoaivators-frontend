@@ -28,6 +28,7 @@ export function Contact() {
   });
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,11 +75,13 @@ export function Contact() {
         const errorData = await response.json();
         console.error('Backend error:', JSON.stringify(errorData, null, 2));
         console.error('Status:', response.status);
+        setErrorMessage(errorData.error || errorData.message || 'Failed to send');
         setStatus('error');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       console.error('Error details:', error instanceof Error ? error.message : 'Unknown error');
+      setErrorMessage('Network Error. Please try again.');
       setStatus('error');
     }
   };
@@ -456,7 +459,9 @@ export function Contact() {
                         <span>Message Sent!</span>
                       </motion.div>
                     ) : status === 'error' ? (
-                      <span>Failed to Send. Try Again.</span>
+                      <span className="text-sm">
+                        {errorMessage || 'Failed to Send. Try Again.'}
+                      </span>
                     ) : (
                       <>
                         <SendIcon className="w-5 h-5" />
