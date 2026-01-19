@@ -4,6 +4,7 @@ import {
   MailIcon, PhoneIcon, MapPinIcon, SendIcon, Check
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 import { BorderBeam } from '../components/BorderBeam';
 import { SEO } from '../components/SEO';
@@ -34,54 +35,61 @@ export function Contact() {
     e.preventDefault();
     setStatus('loading');
 
-
     try {
-      // Use the Render backend URL in production, local proxy in development
-      const apiUrl = import.meta.env.PROD
-        ? 'https://backend-service-blmm.onrender.com/api/send-email'
-        : '/api/send-email';
+      // EmailJS Configuration
+      // TODO: Replace these placeholders with your actual EmailJS credentials
+      const SERVICE_ID = 'YOUR_SERVICE_ID';
+      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+      const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 
-      console.log('Attempting to send email to:', apiUrl);
+      const templateParams = {
+        from_name: formState.name,
+        from_email: formState.email,
+        phone_number: `${formState.countryCode} ${formState.phone}`,
+        subject: formState.subject,
+        message: formState.message,
+        // Additional fields based on subject
+        area_of_interest: formState.areaOfInterest,
+        company_name: formState.companyName,
+        role: formState.role,
+        year_started: formState.yearStarted,
+        interested_area: formState.interestedArea,
+        years_of_experience: formState.yearsOfExperience,
+        previous_company: formState.previousCompany,
+      };
 
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formState),
+      console.log('Sending email via EmailJS...');
+
+      const response = await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY
+      );
+
+      console.log('Email sent successfully:', response);
+      setStatus('success');
+      setFormState({
+        name: '',
+        email: '',
+        countryCode: '+91',
+        phone: '',
+        subject: 'General Inquiry',
+        areaOfInterest: '',
+        companyName: '',
+        role: '',
+        yearStarted: '',
+        interestedArea: '',
+        yearsOfExperience: '',
+        previousCompany: '',
+        message: ''
       });
+      setTimeout(() => setStatus('idle'), 5000);
 
-      if (response.ok) {
-        const successData = await response.json();
-        console.log('Email sent successfully:', successData);
-        setStatus('success');
-        setFormState({
-          name: '',
-          email: '',
-          countryCode: '+91',
-          phone: '',
-          subject: 'General Inquiry',
-          areaOfInterest: '',
-          companyName: '',
-          role: '',
-          yearStarted: '',
-          interestedArea: '',
-          yearsOfExperience: '',
-          previousCompany: '',
-          message: ''
-        });
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        const errorData = await response.json();
-        console.error('Backend error:', JSON.stringify(errorData, null, 2));
-        console.error('Status:', response.status);
-        setErrorMessage(errorData.error || errorData.message || 'Failed to send');
-        setStatus('error');
-      }
     } catch (error) {
       console.error('Error submitting form:', error);
-      console.error('Error details:', error instanceof Error ? error.message : 'Unknown error');
-      setErrorMessage('Network Error. Please try again.');
+      // @ts-ignore
+      setErrorMessage(error.text || 'Failed to send');
       setStatus('error');
     }
   };
