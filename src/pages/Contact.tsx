@@ -38,9 +38,10 @@ export function Contact() {
     try {
       // EmailJS Configuration
       // TODO: Replace these placeholders with your actual EmailJS credentials
-      const SERVICE_ID = 'YOUR_SERVICE_ID';
-      const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-      const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+      // Replace these with your actual keys from https://dashboard.emailjs.com/
+      const SERVICE_ID = 'your_service_id_here';
+      const TEMPLATE_ID = 'your_template_id_here';
+      const PUBLIC_KEY = 'your_public_key_here';
 
       const templateParams = {
         from_name: formState.name,
