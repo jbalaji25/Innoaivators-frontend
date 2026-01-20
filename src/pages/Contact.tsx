@@ -37,7 +37,7 @@ export function Contact() {
     try {
       // Use the Render backend URL in production, local proxy in development
       const apiUrl = import.meta.env.PROD
-        ? 'https://backend-service-blmm.onrender.com/api/send-email'
+        ? 'https://innoaivators-backend.onrender.com/api/send-email'
         : '/api/send-email';
 
       console.log('Attempting to send email to:', apiUrl);
