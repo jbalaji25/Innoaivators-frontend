@@ -12,6 +12,7 @@ import allen from '../team/allen.jpg';
 
 import mafaz from '../team/mafaz.jpg';
 import safiq from '../team/safiq.jpg';
+import jayabalaji from '../team/jayabalaji.jpg';
 import useMediaQuery from '../hooks/useMediaQuery';
 
 import Timeline from './Timeline';
@@ -73,6 +74,12 @@ export function About() {
       name: 'Safiq',
       role: 'Co-founder, Creative Designer & Developer',
       image: safiq,
+    },
+    {
+      id: '7',
+      name: 'JayaBalaji',
+      role: 'Co-founder, HR, Senior developer',
+      image: jayabalaji,
     },
   ];
 
