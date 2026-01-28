@@ -123,6 +123,7 @@ export function Contact() {
         loop
         muted
         playsInline
+        preload="none"
         className="fixed inset-0 w-full h-full object-cover z-0 opacity-30 pointer-events-none"
       >
         <source src={backgroundVideo} type="video/mp4" />

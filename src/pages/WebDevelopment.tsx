@@ -8,8 +8,7 @@ import { motion } from 'framer-motion';
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
 import { SEO } from '../components/SEO';
-import Lottie from 'lottie-react';
-import responsiveXperience from '../assets/animations/responsive_xperience.json';
+import { LazyLottie } from '../components/LazyLottie';
 
 export function WebDevelopment() {
 
@@ -341,8 +340,8 @@ export function WebDevelopment() {
             >
               <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-3xl group transform transition-transform hover:scale-[1.01] duration-700">
                 <BorderBeam duration={12} size={300} colorFrom="#c084fc" colorTo="#6366f1" />
-                <Lottie
-                  animationData={responsiveXperience}
+                <LazyLottie
+                  animationPath="responsive_xperience.json"
                   loop={true}
                   className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700"
                 />

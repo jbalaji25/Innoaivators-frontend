@@ -8,8 +8,7 @@ import { motion } from 'framer-motion';
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
 import { SEO } from '../components/SEO';
-import Lottie from 'lottie-react';
-import smartCity from '../assets/animations/smart_city.json';
+import { LazyLottie } from '../components/LazyLottie';
 
 export function IoTDevelopment() {
 
@@ -306,8 +305,8 @@ export function IoTDevelopment() {
             >
               <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-3xl group transform transition-transform hover:scale-[1.01] duration-700">
                 <BorderBeam duration={12} size={300} colorFrom="#10b981" colorTo="#34d399" />
-                <Lottie
-                  animationData={smartCity}
+                <LazyLottie
+                  animationPath="smart_city.json"
                   loop={true}
                   className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-1000"
                   style={{ filter: 'hue-rotate(200deg) saturate(1.8)' }}

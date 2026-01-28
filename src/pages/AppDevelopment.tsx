@@ -7,8 +7,7 @@ import { motion } from 'framer-motion';
 import { BorderBeam } from '../components/BorderBeam';
 import { TechStackCarousel } from '../components/TechStackCarousel';
 import { SEO } from '../components/SEO';
-import Lottie from 'lottie-react';
-import mobileAppDev from '../assets/animations/mobile_app_development.json';
+import { LazyLottie } from '../components/LazyLottie';
 
 export function AppDevelopment() {
 
@@ -325,8 +324,8 @@ export function AppDevelopment() {
             >
               <div className="relative rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(217,70,239,0.2)]">
                 <BorderBeam duration={12} size={300} colorFrom="#d946ef" colorTo="#f0abfc" />
-                <Lottie
-                  animationData={mobileAppDev}
+                <LazyLottie
+                  animationPath="mobile_app_development.json"
                   loop={true}
                   className="w-full h-full object-cover filter grayscale contrast-125 brightness-75 hover:grayscale-0 transition-all duration-700"
                   style={{ filter: 'hue-rotate(300deg) saturate(1.5)' }}

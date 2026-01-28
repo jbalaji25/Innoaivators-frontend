@@ -7,8 +7,7 @@ import { motion } from 'framer-motion';
 
 import { BorderBeam } from '../components/BorderBeam';
 import { SEO } from '../components/SEO';
-import Lottie from 'lottie-react';
-import proksyDigital from '../assets/animations/proksy_digital.json';
+import { LazyLottie } from '../components/LazyLottie';
 
 export function DigitalMarketing() {
 
@@ -300,8 +299,8 @@ export function DigitalMarketing() {
             >
               <div className="relative rounded-[2rem] overflow-hidden border border-orange-500/20 shadow-[0_0_60px_rgba(249,115,22,0.15)] group h-[500px]">
                 <BorderBeam duration={12} size={300} colorFrom="#f97316" colorTo="#fb923c" />
-                <Lottie
-                  animationData={proksyDigital}
+                <LazyLottie
+                  animationPath="proksy_digital.json"
                   loop={true}
                   className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-1000"
                   style={{ filter: 'hue-rotate(200deg) saturate(1.8)' }}
