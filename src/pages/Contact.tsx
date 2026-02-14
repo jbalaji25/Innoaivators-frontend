@@ -130,7 +130,7 @@ export function Contact() {
       </video>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden pt-40">
+      <section className="relative min-h-[30vh] md:min-h-[50vh] flex items-center justify-center overflow-hidden pt-28 md:pt-40">
         <div className="absolute inset-0 z-0">
         </div>
 
@@ -145,7 +145,7 @@ export function Contact() {
               24/7 Global Support
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-bold leading-tight text-white mb-6">
+            <h1 className="text-4xl md:text-8xl font-bold leading-tight text-white mb-6">
               Let's Build the <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 text-glow">Impossible.</span>
             </h1>
@@ -154,9 +154,9 @@ export function Contact() {
       </section>
 
       {/* --- FORM SECTION --- */}
-      <section className="pb-32 px-6 relative z-10">
+      <section className="pb-16 md:pb-32 px-4 md:px-6 relative z-10">
         <div className="container mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto">
 
             {/* Contact Info */}
             <motion.div
@@ -197,7 +197,7 @@ export function Contact() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative p-8 md:p-10 rounded-[2rem] bg-[#0A0A12] border border-white/10 shadow-2xl">
+              <div className="relative p-6 md:p-10 rounded-[2rem] bg-[#0A0A12] border border-white/10 shadow-2xl">
                 <BorderBeam duration={10} size={100} colorFrom="#3b82f6" colorTo="#a855f7" />
 
                 <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
