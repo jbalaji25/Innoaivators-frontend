@@ -11,20 +11,26 @@ interface LazyLottieProps {
 // Pre-import all animations as URLs using Vite's glob import
 const animations = import.meta.glob('../assets/animations/*.json', { as: 'url', eager: true });
 
+// Memory cache for animation data
+const animationCache: Record<string, any> = {};
+
 export function LazyLottie({
     animationPath,
     className = '',
     style = {},
     loop = true,
     autoplay = true,
-}: LazyLottieProps) {
+    priority = false, // New priority prop
+}: LazyLottieProps & { priority?: boolean }) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(priority); // Initialize as visible if priority is true
     const [Lottie, setLottie] = useState<any>(null);
     const [animationData, setAnimationData] = useState<any>(null);
 
     // Intersection Observer to detect when component is in viewport
     useEffect(() => {
+        if (priority) return; // Skip observer if priority is true
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -34,8 +40,8 @@ export function LazyLottie({
                 });
             },
             {
-                rootMargin: '50px', // Start loading 50px before entering viewport
-                threshold: 0.1,
+                rootMargin: '400px', // Start loading much earlier (was 50px)
+                threshold: 0.01,
             }
         );
 
@@ -48,7 +54,7 @@ export function LazyLottie({
                 observer.unobserve(containerRef.current);
             }
         };
-    }, [isVisible]);
+    }, [isVisible, priority]);
 
     // Load Lottie library and animation data when visible
     useEffect(() => {
@@ -56,30 +62,43 @@ export function LazyLottie({
 
         const loadLottie = async () => {
             try {
-                // Dynamically import Lottie library
-                const LottieModule = await import('lottie-react');
-                setLottie(() => LottieModule.default);
-
-                // Dynamically load animation data using fetch from asset URL
+                // Pre-calculate keys
                 const sanitizedPath = animationPath.replace(/\.json$/, '');
                 const key = `../assets/animations/${sanitizedPath}.json`;
                 const assetUrl = animations[key];
 
-                if (assetUrl) {
-                    const response = await fetch(assetUrl as string);
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    const data = await response.json();
-                    setAnimationData(data);
-                } else {
-                    console.error(`Animation not found: ${key}. Available animations:`, Object.keys(animations));
+                if (!assetUrl) {
+                    console.error(`Animation not found: ${key}`);
+                    return;
                 }
+
+                // Dynamically import Lottie library (if not already loaded)
+                if (!Lottie) {
+                    const LottieModule = await import('lottie-react');
+                    setLottie(() => LottieModule.default);
+                }
+
+                // Check cache first
+                if (animationCache[key]) {
+                    setAnimationData(animationCache[key]);
+                    return;
+                }
+
+                // Fetch animation data
+                const response = await fetch(assetUrl as string);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.json();
+
+                // Save to cache and state
+                animationCache[key] = data;
+                setAnimationData(data);
             } catch (error) {
                 console.error('Failed to load Lottie animation:', error);
             }
         };
 
         loadLottie();
-    }, [isVisible, animationPath]);
+    }, [isVisible, animationPath, Lottie]);
 
     return (
         <div ref={containerRef} className={className} style={style}>

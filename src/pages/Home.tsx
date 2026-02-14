@@ -1,14 +1,17 @@
 
+import React, { Suspense } from 'react';
 import { ClientCarousel } from '../components/ClientCarousel';
 
 // Components
 import { HeroSection } from '../components/home/HeroSection';
-import { WhatWeDoSection } from '../components/home/WhatWeDoSection';
-import { StatsSection } from '../components/home/StatsSection';
-import { ServicesSection } from '../components/home/ServicesSection';
-import { WhyChooseUsSection } from '../components/home/WhyChooseUsSection';
-import { TestimonialsSection } from '../components/home/TestimonialsSection';
 import { SEO } from '../components/SEO';
+
+// Lazy load below-the-fold sections
+const WhatWeDoSection = React.lazy(() => import('../components/home/WhatWeDoSection').then(m => ({ default: m.WhatWeDoSection })));
+const StatsSection = React.lazy(() => import('../components/home/StatsSection').then(m => ({ default: m.StatsSection })));
+const ServicesSection = React.lazy(() => import('../components/home/ServicesSection').then(m => ({ default: m.ServicesSection })));
+const WhyChooseUsSection = React.lazy(() => import('../components/home/WhyChooseUsSection').then(m => ({ default: m.WhyChooseUsSection })));
+const TestimonialsSection = React.lazy(() => import('../components/home/TestimonialsSection').then(m => ({ default: m.TestimonialsSection })));
 
 export function Home() {
   return (
@@ -20,12 +23,15 @@ export function Home() {
       />
 
       <HeroSection />
-      <WhatWeDoSection />
-      <StatsSection />
-      <ServicesSection />
-      <WhyChooseUsSection />
-      <ClientCarousel />
-      <TestimonialsSection />
+
+      <Suspense fallback={<div className="h-20" />}>
+        <WhatWeDoSection />
+        <StatsSection />
+        <ServicesSection />
+        <WhyChooseUsSection />
+        <ClientCarousel />
+        <TestimonialsSection />
+      </Suspense>
     </div>
   );
 }

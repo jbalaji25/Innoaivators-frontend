@@ -1,14 +1,20 @@
-
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import Galaxy from '../Galaxy';
 import useMediaQuery from '../../hooks/useMediaQuery';
+
+// Lazy load the heavy Galaxy component
+const Galaxy = React.lazy(() => import('../Galaxy'));
 
 export function HeroSection() {
     const isLg = useMediaQuery('(min-width: 1024px)');
 
     return (
         <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
-            {isLg && <Galaxy className="absolute inset-0 z-0" />}
+            {isLg && (
+                <Suspense fallback={<div className="absolute inset-0 bg-[#050205]" />}>
+                    <Galaxy className="absolute inset-0 z-0" />
+                </Suspense>
+            )}
             <div className="absolute inset-0 -z-10 bg-black/40"></div>
             <div className="relative z-10 max-w-4xl mx-auto px-4">
                 <div>
