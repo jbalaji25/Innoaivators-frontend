@@ -247,7 +247,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
 
     if (autoPlay > 0 && isInView && (!pauseOnHover || !isHovered)) {
       interval = setInterval(() => {
-        paginate(-1);
+        paginate(1);
       }, autoPlay);
     }
 
