@@ -181,7 +181,7 @@ export function About() {
                 infoPosition="bottom"
                 infoBackground="rgba(0, 0, 0, 0.5)"
                 autoPlay={1000}
-                animationDuration={400}
+                animationDuration={300}
                 infoTextColor="white"
                 visibleCards={2}
               />

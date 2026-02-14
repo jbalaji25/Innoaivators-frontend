@@ -112,11 +112,30 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   const visibleCards = isLg ? effectiveVisibleCardsProp : 1;
   const sideCardScale = isLg ? sideCardScaleProp : 0.8;
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [isInView, setIsInView] = useState(false); // New state for visibility
+  const [isHovered, setIsHovered] = useState(false); // New state for hover
   const [direction, setDirection] = useState(0); // 0: no movement, 1: next, -1: prev
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
   const totalMembers = members.length;
+
+  // Intersection Observer to detect visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    const container = document.getElementById('team-carousel-container');
+    if (container) observer.observe(container);
+
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, []);
 
   const paginate = useCallback(
     (newDirection: number) => {
@@ -155,7 +174,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       // You can use a string preset like 'easeInOut' or a valid cubic-bezier array if framer-motion's types support it directly
       // For the given numbers, 'easeInOut' is a close approximation or 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' if framer-motion accepted it directly as string
       // To strictly match [0.25, 0.46, 0.45, 0.94], framer-motion expects it as a CubicBezier tuple:
-      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+      ease: "circOut" as any,
     };
 
     switch (position) {
@@ -222,42 +241,20 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     }
   };
 
-  // Auto-play functionality
+  // Auto-play functionality - only runs when in view and not hovered
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (autoPlay > 0) {
+
+    if (autoPlay > 0 && isInView && (!pauseOnHover || !isHovered)) {
       interval = setInterval(() => {
-        paginate(-1); // Changed from 1 to -1 for left-to-right movement
+        paginate(-1);
       }, autoPlay);
     }
 
-    const carouselContainer = document.getElementById('team-carousel-container');
-
-    const handleMouseEnter = () => {
-      if (pauseOnHover && autoPlay > 0) clearInterval(interval);
-    };
-
-    const handleMouseLeave = () => {
-      if (pauseOnHover && autoPlay > 0) {
-        interval = setInterval(() => {
-          paginate(-1); // Changed from 1 to -1 for left-to-right movement
-        }, autoPlay);
-      }
-    };
-
-    if (carouselContainer && pauseOnHover && autoPlay > 0) {
-      carouselContainer.addEventListener('mouseenter', handleMouseEnter);
-      carouselContainer.addEventListener('mouseleave', handleMouseLeave);
-    }
-
     return () => {
-      clearInterval(interval);
-      if (carouselContainer && pauseOnHover && autoPlay > 0) {
-        carouselContainer.removeEventListener('mouseenter', handleMouseEnter);
-        carouselContainer.removeEventListener('mouseleave', handleMouseLeave);
-      }
+      if (interval) clearInterval(interval);
     };
-  }, [autoPlay, paginate, pauseOnHover]);
+  }, [autoPlay, paginate, pauseOnHover, isInView, isHovered]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -315,6 +312,8 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       className={cn(`flex flex-col items-center justify-center overflow-hidden relative 
         transparent`, className)}
       style={{ background: background }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
