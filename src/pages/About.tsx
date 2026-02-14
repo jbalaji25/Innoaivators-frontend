@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { TeamCarousel } from '../components/TeamCarousel';
 import { BorderBeam } from '../components/BorderBeam';
 import { SEO } from '../components/SEO';
-import video from '../backgroundeffects/3129977-uhd_3840_2160_30fps.mp4';
 import abdur from '../team/abdur.jpg';
 import afsal from '../team/afsal.jpg';
 import allen from '../team/allen.jpg';
@@ -13,13 +12,11 @@ import allen from '../team/allen.jpg';
 import mafaz from '../team/mafaz.jpg';
 import safiq from '../team/safiq.jpg';
 import jayabalaji from '../team/JayaBalaji.jpg';
-import useMediaQuery from '../hooks/useMediaQuery';
 
 import Timeline from './Timeline';
 import './Timeline.css';
 
 export function About() {
-  const isLg = useMediaQuery('(min-width: 1024px)');
   const values = [
     {
       icon: TargetIcon,
@@ -90,18 +87,6 @@ export function About() {
         description="Learn about Innoaivators, our mission, values, and the team behind our innovative digital solutions."
         canonical="https://innoaivators.com/about"
       />
-      {isLg && (
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          id="background-video"
-        >
-          <source src={video} type="video/mp4" />
-        </video>
-      )}
       <div className="content-container">
         <section className="pt-40 pb-20 px-4 sm:px-6 lg:px-8 about-content">
           <div className="max-w-7xl mx-auto">
