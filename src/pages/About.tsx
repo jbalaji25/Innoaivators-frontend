@@ -46,18 +46,24 @@ export function About() {
       name: 'Abdur',
       role: 'Founder, Gen AI Specialist, IoT Developer',
       image: abdur,
+      imageScale: 1.15,
+      imageOffset: { x: 50, y: 15 },
     },
     {
       id: '2',
       name: 'Afsal',
       role: 'Co-founder, CEO',
       image: afsal,
+      imageScale: 0.95,
+      imageOffset: { x: 50, y: 10 },
     },
     {
       id: '3',
       name: 'Allen',
       role: 'Co-founder, MD',
       image: allen,
+      imageScale: 1.8,
+      imageOffset: { x: 50, y: 15 },
     },
 
     {
@@ -65,18 +71,24 @@ export function About() {
       name: 'Mafaz',
       role: 'Co-founder, AI Specialist & Prompt Engineer',
       image: mafaz,
+      imageScale: 1.2,
+      imageOffset: { x: 50, y: 15 },
     },
     {
       id: '6',
       name: 'Safiq',
       role: 'Co-founder, Creative Designer & Developer',
       image: safiq,
+      imageScale: 1.1,
+      imageOffset: { x: 50, y: 10 },
     },
     {
       id: '7',
       name: 'JayaBalaji',
       role: 'Co-founder, HR, Senior developer',
       image: jayabalaji,
+      imageScale: 1.2,
+      imageOffset: { x: 50, y: 15 },
     },
   ];
 
@@ -165,8 +177,8 @@ export function About() {
                 members={members}
                 infoPosition="bottom"
                 infoBackground="rgba(0, 0, 0, 0.5)"
-                autoPlay={1000}
-                animationDuration={300}
+                autoPlay={2000}
+                animationDuration={800}
                 infoTextColor="white"
                 visibleCards={2}
               />

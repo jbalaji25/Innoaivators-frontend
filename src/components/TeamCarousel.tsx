@@ -12,6 +12,8 @@ export interface TeamMember {
   role: string;
   image: string;
   bio?: string;
+  imageScale?: number;
+  imageOffset?: { x: number; y: number };
 }
 
 export interface TeamCarouselProps {
@@ -104,17 +106,18 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   initialIndex = 0,
 }) => {
   const isLg = useMediaQuery('(min-width: 1024px)');
+  const isMd = useMediaQuery('(min-width: 768px)');
   const isMobile = useMediaQuery('(max-width: 639px)');
 
   // Determine effective dimensions based on screen size
-  const effectiveCardWidth = isLg ? cardWidth : (isMobile ? 220 : 260);
-  const effectiveCardHeight = isLg ? cardHeight : (isMobile ? 220 : 350);
+  const effectiveCardWidth = isLg ? cardWidth : (isMobile ? 220 : 250);
+  const effectiveCardHeight = isLg ? cardHeight : (isMobile ? 220 : 340);
 
   // Clamp visibleCards to ensure balanced layout: max (totalMembers - 1) / 2
   const maxVisible = Math.max(1, Math.floor((members.length - 1) / 2));
   const effectiveVisibleCardsProp = Math.min(visibleCardsProp, maxVisible);
 
-  const visibleCards = isLg ? effectiveVisibleCardsProp : 1;
+  const visibleCards = isMd ? effectiveVisibleCardsProp : 1;
   const sideCardScale = isLg ? sideCardScaleProp : 0.8;
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isInView, setIsInView] = useState(false); // New state for visibility
@@ -415,6 +418,10 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover"
+                    style={{
+                      transform: `scale(${member.imageScale || 1})`,
+                      objectPosition: member.imageOffset ? `${member.imageOffset.x}% ${member.imageOffset.y}%` : 'center',
+                    }}
                   />
 
                   {/* Overlay Info */}
