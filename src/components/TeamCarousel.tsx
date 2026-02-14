@@ -227,7 +227,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     let interval: NodeJS.Timeout;
     if (autoPlay > 0) {
       interval = setInterval(() => {
-        paginate(1);
+        paginate(-1); // Changed from 1 to -1 for left-to-right movement
       }, autoPlay);
     }
 
@@ -240,7 +240,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     const handleMouseLeave = () => {
       if (pauseOnHover && autoPlay > 0) {
         interval = setInterval(() => {
-          paginate(1);
+          paginate(-1); // Changed from 1 to -1 for left-to-right movement
         }, autoPlay);
       }
     };

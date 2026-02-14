@@ -91,7 +91,14 @@ export function About() {
         canonical="https://innoaivators.com/about"
       />
       {isLg && (
-        <video autoPlay loop muted id="background-video">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          id="background-video"
+        >
           <source src={video} type="video/mp4" />
         </video>
       )}
@@ -169,7 +176,15 @@ export function About() {
               <h2 className="text-4xl font-bold text-center text-white mb-2">
                 Our Team
               </h2>
-              <TeamCarousel members={members} infoPosition="bottom" infoBackground="rgba(0, 0, 0, 0.5)" autoPlay={3000} infoTextColor="white" visibleCards={2} />
+              <TeamCarousel
+                members={members}
+                infoPosition="bottom"
+                infoBackground="rgba(0, 0, 0, 0.5)"
+                autoPlay={1000}
+                animationDuration={400}
+                infoTextColor="white"
+                visibleCards={2}
+              />
             </motion.div>
 
             <motion.div
