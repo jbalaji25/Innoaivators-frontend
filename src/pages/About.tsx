@@ -46,24 +46,24 @@ export function About() {
       name: 'Abdur',
       role: 'Founder, Gen AI Specialist, IoT Developer',
       image: abdur,
-      imageScale: 1.15,
-      imageOffset: { x: 50, y: 15 },
+      imageScale: 1.0,
+      imageOffset: { x: 50, y: 40 },
     },
     {
       id: '2',
       name: 'Afsal',
       role: 'Co-founder, CEO',
       image: afsal,
-      imageScale: 0.95,
-      imageOffset: { x: 50, y: 10 },
+      imageScale: 1.0,
+      imageOffset: { x: 50, y: 15 },
     },
     {
       id: '3',
       name: 'Allen',
       role: 'Co-founder, MD',
       image: allen,
-      imageScale: 1.8,
-      imageOffset: { x: 50, y: 15 },
+      imageScale: 1.0,
+      imageOffset: { x: 50, y: 10 },
     },
 
     {
@@ -71,7 +71,7 @@ export function About() {
       name: 'Mafaz',
       role: 'Co-founder, AI Specialist & Prompt Engineer',
       image: mafaz,
-      imageScale: 1.2,
+      imageScale: 1.0,
       imageOffset: { x: 50, y: 15 },
     },
     {
@@ -79,15 +79,15 @@ export function About() {
       name: 'Safiq',
       role: 'Co-founder, Creative Designer & Developer',
       image: safiq,
-      imageScale: 1.1,
-      imageOffset: { x: 50, y: 10 },
+      imageScale: 1.0,
+      imageOffset: { x: 50, y: 45 },
     },
     {
       id: '7',
       name: 'JayaBalaji',
       role: 'Co-founder, HR, Senior developer',
       image: jayabalaji,
-      imageScale: 1.2,
+      imageScale: 1.0,
       imageOffset: { x: 50, y: 15 },
     },
   ];
@@ -168,7 +168,7 @@ export function About() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-20 w-full flex flex-col items-center"
+              className="mb-20 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex flex-col items-center"
             >
               <h2 className="text-4xl font-bold text-center text-white mb-2">
                 Our Team
@@ -180,7 +180,7 @@ export function About() {
                 autoPlay={2000}
                 animationDuration={800}
                 infoTextColor="white"
-                visibleCards={2}
+                cardWidth={340}
               />
             </motion.div>
 

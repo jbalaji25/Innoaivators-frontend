@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../lib/utils'; // Assuming this utility correctly merges class names
 import useMediaQuery from '../hooks/useMediaQuery';
@@ -33,8 +32,6 @@ export interface TeamCarouselProps {
   cardHeight?: number;
   /** Card border radius */
   cardRadius?: number;
-  /** Enable/disable navigation arrows */
-  showArrows?: boolean;
   /** Enable/disable dots indicator */
   showDots?: boolean;
   /** Enable/disable keyboard navigation */
@@ -84,16 +81,13 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   cardWidth = 280,
   cardHeight = 380,
   cardRadius = 20,
-  showArrows = true,
   showDots = true,
   keyboardNavigation = true,
   touchNavigation = true,
   animationDuration = 800,
   autoPlay = 0,
   pauseOnHover = true,
-  visibleCards: visibleCardsProp = 2,
   sideCardScale: sideCardScaleProp = 0.9,
-  sideCardOpacity = 0.8,
   grayscaleEffect = true,
   className,
   cardClassName,
@@ -106,19 +100,15 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   initialIndex = 0,
 }) => {
   const isLg = useMediaQuery('(min-width: 1024px)');
-  const isMd = useMediaQuery('(min-width: 768px)');
   const isMobile = useMediaQuery('(max-width: 639px)');
 
   // Determine effective dimensions based on screen size
-  const effectiveCardWidth = isLg ? cardWidth : (isMobile ? 220 : 250);
-  const effectiveCardHeight = isLg ? cardHeight : (isMobile ? 220 : 340);
+  const effectiveCardWidth = isLg ? cardWidth : (isMobile ? 220 : Math.max(250, cardWidth * 0.8));
+  const effectiveCardHeight = isLg ? cardHeight : (isMobile ? 220 : Math.max(340, cardHeight * 0.8));
 
-  // Clamp visibleCards to ensure balanced layout: max (totalMembers - 1) / 2
-  const maxVisible = Math.max(1, Math.floor((members.length - 1) / 2));
-  const effectiveVisibleCardsProp = Math.min(visibleCardsProp, maxVisible);
-
-  const visibleCards = isMd ? effectiveVisibleCardsProp : 1;
-  const sideCardScale = isLg ? sideCardScaleProp : 0.8;
+  // Show 5 cards (visibleCards = 2) if possible, otherwise scale down for mobile
+  const visibleCards = members.length >= 5 ? 2 : 1;
+  const sideCardScale = isLg ? sideCardScaleProp : 0.85;
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isInView, setIsInView] = useState(false); // New state for visibility
   const [isHovered, setIsHovered] = useState(false); // New state for hover
@@ -199,40 +189,40 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       case 'right-1':
         return {
           zIndex: 5,
-          opacity: sideCardOpacity,
+          opacity: 1,
           scale: sideCardScale,
-          x: effectiveCardWidth * 0.7,
-          filter: grayscaleEffect ? 'grayscale(100%)' : 'grayscale(0%)',
+          x: effectiveCardWidth * 0.8,
+          filter: 'grayscale(100%)',
           pointerEvents: 'auto',
           transition,
         };
       case 'right-2':
         return {
           zIndex: 1,
-          opacity: sideCardOpacity * 0.7,
+          opacity: 0.8,
           scale: sideCardScale * 0.9,
-          x: effectiveCardWidth * 1.4,
-          filter: grayscaleEffect ? 'grayscale(100%)' : 'grayscale(0%)',
+          x: effectiveCardWidth * 1.6,
+          filter: 'grayscale(100%)',
           pointerEvents: 'auto',
           transition,
         };
       case 'left-1':
         return {
           zIndex: 5,
-          opacity: sideCardOpacity,
+          opacity: 1,
           scale: sideCardScale,
-          x: -effectiveCardWidth * 0.7,
-          filter: grayscaleEffect ? 'grayscale(100%)' : 'grayscale(0%)',
+          x: -effectiveCardWidth * 0.8,
+          filter: 'grayscale(100%)',
           pointerEvents: 'auto',
           transition,
         };
       case 'left-2':
         return {
           zIndex: 1,
-          opacity: sideCardOpacity * 0.7,
+          opacity: 0.8,
           scale: sideCardScale * 0.9,
-          x: -effectiveCardWidth * 1.4,
-          filter: grayscaleEffect ? 'grayscale(100%)' : 'grayscale(0%)',
+          x: -effectiveCardWidth * 1.6,
+          filter: 'grayscale(100%)',
           pointerEvents: 'auto',
           transition,
         };
@@ -317,7 +307,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   return (
     <div
       id="team-carousel-container"
-      className={cn(`flex flex-col items-center justify-center overflow-hidden relative 
+      className={cn(`flex flex-col items-center justify-center relative 
         transparent`, className)}
       style={{ background: background }}
       onMouseEnter={() => setIsHovered(true)}
@@ -345,33 +335,17 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
         </h2>
       )}
 
+
+
       {/* Carousel Container */}
       <div
-        className="w-full max-w-6xl relative mt-20"
+        className="w-full max-w-full relative mt-20"
         style={{
           height: effectiveCardHeight + 100,
           perspective: '1000px',
         }}
       >
-        {/* Navigation Arrows */}
-        {showArrows && (
-          <>
-            <motion.button
-              onClick={() => paginate(-1)}
-              className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center z-20 transition-all duration-300 hover:scale-110"
-              whileTap={{ scale: 0.9 }}
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </motion.button>
-            <motion.button
-              onClick={() => paginate(1)}
-              className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center z-20 transition-all duration-300 hover:scale-110"
-              whileTap={{ scale: 0.9 }}
-            >
-              <ChevronRight className="w-6 h-6" />
-            </motion.button>
-          </>
-        )}
+
 
         {/* Cards Track */}
         <div
@@ -389,7 +363,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                 <motion.div
                   key={member.id}
                   className={cn(
-                    "absolute bg-white overflow-hidden shadow-2xl cursor-pointer",
+                    "absolute bg-black overflow-hidden shadow-2xl cursor-pointer",
                     cardClassName
                   )}
                   style={{
